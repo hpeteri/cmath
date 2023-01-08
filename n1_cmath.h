@@ -805,7 +805,8 @@ quaternion quat_from_basis_vectors(vec3 u0, vec3 u1, vec3 u2){
 }
 
 quaternion quat_look_rot(vec3 forward, vec3 up){
-  
+
+  forward = vec3_negate(forward);
   vec3 right = vec3_cross(up, forward);
   up = vec3_cross(forward, right);
 
@@ -813,7 +814,7 @@ quaternion quat_look_rot(vec3 forward, vec3 up){
                                          vec3_normalize(up),
                                          vec3_normalize(forward));
 
-  return q;  
+  return q;
 }
 //----------------------------------------
 // mat4
@@ -1047,7 +1048,7 @@ mat4 mat4_ortho_rh(float left, float right, float top, float bottom, float ne, f
   mat4 m = {
     2.0f / (right - left), 0.0f, 0.0f, 0.0f,
     0.0f, 2.0f / (top - bottom), 0.0f, 0.0f,
-    0.0f, 0.0f, 1.0f / (ne - fa), 0.0f,
+    0.0f, 0.0f, 2.0f / (ne - fa), 0.0f,
     ((right + left) / (left - right)), ((top + bottom) / (bottom - top)), (ne / (ne - fa)), 1.0f};
 
   return m;
