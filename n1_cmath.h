@@ -805,7 +805,8 @@ quaternion quat_from_basis_vectors(vec3 u0, vec3 u1, vec3 u2){
 }
 
 quaternion quat_look_rot(vec3 forward, vec3 up){
-  
+
+  forward = vec3_negate(forward);
   vec3 right = vec3_cross(up, forward);
   up = vec3_cross(forward, right);
 
@@ -813,7 +814,7 @@ quaternion quat_look_rot(vec3 forward, vec3 up){
                                          vec3_normalize(up),
                                          vec3_normalize(forward));
 
-  return q;  
+  return q;
 }
 //----------------------------------------
 // mat4
