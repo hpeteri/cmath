@@ -1048,7 +1048,7 @@ mat4 mat4_ortho_rh(float left, float right, float top, float bottom, float ne, f
   mat4 m = {
     2.0f / (right - left), 0.0f, 0.0f, 0.0f,
     0.0f, 2.0f / (top - bottom), 0.0f, 0.0f,
-    0.0f, 0.0f, 1.0f / (ne - fa), 0.0f,
+    0.0f, 0.0f, 2.0f / (ne - fa), 0.0f,
     ((right + left) / (left - right)), ((top + bottom) / (bottom - top)), (ne / (ne - fa)), 1.0f};
 
   return m;
