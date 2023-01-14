@@ -2,7 +2,7 @@
 #define N1_CMATH_H
 
 #include <math.h>
-
+#include <stdint.h>
 #include <immintrin.h>
 
 //----------------------------------------

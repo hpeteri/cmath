@@ -1,6 +1,24 @@
 #!/bin/bash
 
 PROJECT_NAME="cmath_tests"
+OUTPUT_NAME="./build/$PROJECT_NAME"
+
+if [[ "$OSTYPE" == "linux-gnu"* ]];
+then
+
+    OUTPUT_NAME+=".a"
+    
+elif [[ "$OSTYPE" == "msys"* ]];
+then
+    
+    OUTPUT_NAME+=".exe"
+else
+
+    echo $OSTYPE
+    echo "unknown os"
+    exit 1
+fi
+
 
 WARNINGS="-Wformat=2 
           -Wmain 
@@ -31,8 +49,10 @@ else
     PREPROCESSOR="-s"
 fi
 
-gcc $PREPROCESSOR $COMPILER_FLAGS $WARNINGS $INCLUDE_FOLDERS "./src/test_main.c" -lm -o "./build/tests.a"
+gcc $PREPROCESSOR $COMPILER_FLAGS $WARNINGS $INCLUDE_FOLDERS "./src/test_main.c" -lm -o $OUTPUT_NAME
 
 popd
 
 exit 0
+exit 1
+
