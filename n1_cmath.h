@@ -5,6 +5,9 @@
 #include <stdint.h>
 #include <immintrin.h>
 
+
+#include <stdlib.h>
+
 //----------------------------------------
 // common
 //----------------------------------------
@@ -17,11 +20,19 @@
 #define HALF_PI64 (1.5707963267948966192313216916397514420985846996875529104874722961)
 #define THETA64   (6.2831853071795864769252867665590057683943387987502116419498891846)
 
+// part of stdlib, but keep these here for now
 
+#ifndef min
 #define min(a, b) (a <= b ? a : b)
+#endif
+
+#ifndef max
 #define max(a, b) (a >= b ? a : b)
+#endif
+
 #define abs(a)    (a > 0 ? a : -a)
 #define sign(a)   (a >= 0 ? 1 : -1)
+
 
 extern const int32_t inf_bits_;
 extern const float   inf32    ;
@@ -35,6 +46,8 @@ int is_inf(float x);
 float clampf(float a, float min, float max);
 float lerpf(float from, float to, float t);
 
+#if 0
+//intrinsics functions
 float sinf(float angle);
 float cosf(float angle);
 float tanf(float angle);
@@ -43,11 +56,13 @@ float asinf(float x);
 float acosf(float x);
 float atanf(float x);
 
-float cotanf(float angle);
 float atan2f(float y, float x);
 
 float sqrtf(float x);
 float fmodf(float n, float d);
+#endif
+
+float cotanf(float angle);
 //----------------------------------------
 // vec 2
 //----------------------------------------
@@ -269,6 +284,7 @@ int is_nan(float x){
 int is_inf(float x){
   return isinf(x);
 }
+
 float clampf(float a, float min, float max){
   float b = max(a, min);
   b = min(b, max);
@@ -279,6 +295,7 @@ float lerpf(float from, float to, float t){
   return (to - from) * t + from;
 }
 
+#if 0
 float sinf(float angle){
   return (float)(sin(angle));
 }
@@ -302,9 +319,8 @@ float acosf(float x){
 float atanf(float x){
   return (float)atan(x);
 }
-float cotanf(float angle){
-  return 1.0f / tan(angle);
-}
+
+
 float atan2f(float y, float x){
   return (float)atan2(y, x);
 }
@@ -317,6 +333,12 @@ float sqrtf(float x){
 }
 float fmodf(float n, float d){
   return (float)(fmod(n, d));
+}
+
+#endif
+
+float cotanf(float angle){
+  return 1.0f / tan(angle);
 }
 
 //----------------------------------------

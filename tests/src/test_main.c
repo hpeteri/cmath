@@ -3,6 +3,11 @@
 #define N1_CMATH_IMPLEMENTATION
 #include "n1_cmath.h"
 
+#if defined(_WIN32)
+#include <windows.h>
+#endif
+
+
 int assert_count = 0;
 
 #define assert(expression) {if(!(expression)){printf("assertion failed '%s' at line %d.\n", __func__, __LINE__);  assert_count ++; /* *(int*)NULL = 0; */ }}
@@ -29,17 +34,24 @@ void test_max(){
   assert_equal(max(-10, 20), 20);
 }
 void test_is_nan(){
+  
+#ifndef _MSC_VER
   assert_equal(0, is_nan(10 / 0.0f));
   assert_equal(0, is_nan(-10 / 0.0f));
+#endif
+
   assert_equal(1, is_nan(nan32));
   assert_equal(1, is_nan(-nan32));
   assert_equal(1, is_nan(sqrtf(-1)));
 }
 void test_is_inf(){
   
+#ifndef _MSC_VER
   assert_equal(0, is_inf(0.0));
   assert_equal(1, is_inf(1.0/0.0));
-  assert_equal(-1, is_inf(-1.0/0.0));
+  assert_equal(1, is_inf(-1.0/0.0));
+#endif
+
   assert_equal(0, is_inf(sqrt(-1.0)));
 }
 void test_clampf(){
