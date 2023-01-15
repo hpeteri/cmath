@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time
 start_time = time.time()
 
@@ -23,7 +25,6 @@ def set_src():
     ./src/test_main.c
     """
 
-    
 def set_command_line_options():
     set_src()
 
@@ -47,8 +48,7 @@ def set_command_line_options():
     cc               = "gcc"
     
     if cc == "gcc":
-        preprocessor += ""
-        
+                
         warnings += """
         -Wformat=2 
         -Wmain 
@@ -58,20 +58,17 @@ def set_command_line_options():
         -Werror
         """
             
-        include_folders += """
-        -I ../
-        """
-
-        compiler_options += """ 
-        -O3
-        """
-            
-        libs += """
-        """
-            
+        include_folders += "-I ../ "
+        libs += "-lm"
         linker_options += f"""-o ./build/{output_name}"""
-            
-    
+
+        if "debug" in sys.argv:
+            compiler_options += "-O0"
+            preprocessor += "-g"
+        else:
+            compiler_options += "-O3"
+            preprocessor += "-s"
+        
     elif cc == "cl":
         if sys.platform == "win32":
             preprocessor     += ""
