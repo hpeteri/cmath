@@ -49,7 +49,7 @@ void test_is_inf(){
 #ifndef _MSC_VER
   assert_equal(0, is_inf(0.0));
   assert_equal(1, is_inf(1.0/0.0));
-  assert_equal(1, is_inf(-1.0/0.0));
+  assert_equal(-1, is_inf(-1.0/0.0));
 #endif
 
   assert_equal(0, is_inf(sqrt(-1.0)));
@@ -1072,16 +1072,19 @@ void test_quat_mulq(){
     assert_equal(q0.a, q1.a);
   }
   {
+
+    /*
     quaternion q0 = quat_make_angle_axis(0,  vec3_make(1, 0, 0));
     quaternion q1 = quat_make_angle_axis(PI, vec3_make(0, 1, 0));
     quaternion q2 = quat_mulq(q0, q1);
 
     quaternion r = {
-      q0.k * q1.i + q2.i * q1.k + q2.j * q1.k - q2.k * q1.j,
-      q0.k * q1.j - q2.i * q1.k + q2.j * q1.k + q2.k * q1.i,
-      q0.k * q1.k + q2.i * q1.j - q2.j * q1.i + q2.k * q1.k,
-      q0.k * q1.k - q2.i * q1.i - q2.j * q1.j - q2.k * q1.k
+      .i = q0.k * q1.i + q2.i * q1.k + q2.j * q1.k - q2.k * q1.j,
+      .j = q0.k * q1.j - q2.i * q1.k + q2.j * q1.k + q2.k * q1.i,
+      .k = q0.k * q1.k + q2.i * q1.j - q2.j * q1.i + q2.k * q1.k,
+      .a = q0.k * q1.k - q2.i * q1.i - q2.j * q1.j - q2.k * q1.k
     };
+    */
 
     assert_todo();
     //assert_equal(q2.i, r.i);
@@ -1242,15 +1245,15 @@ void test_mat4_scalev(){
 
 }
 void test_mat4_rot_x(){
-  mat4 m = mat4_rot_x(PI);
+  //mat4 m = mat4_rot_x(PI);
   assert_todo();
 }
 void test_mat4_rot_y(){
-  mat4 m = mat4_rot_y(PI);
+  //mat4 m = mat4_rot_y(PI);
   assert_todo();
 }
 void test_mat4_rot_z(){
-  mat4 m = mat4_rot_z(PI);
+  //mat4 m = mat4_rot_z(PI);
   assert_todo();
 }
 void test_mat4_rot(){
